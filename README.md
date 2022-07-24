@@ -4,7 +4,7 @@
 # 项目介绍
 
 本项目中的医疗数据来自[QASystemOnMedicalKG](https://github.com/liuhuanyong/QASystemOnMedicalKG) 。  
-数据中一共有7类总数为4.4万的医药实体，10类总数约27万实体关系的知识图谱，具体实体以及关系的数据结构介绍见以上或者[这里](https://github.com/jiangnanboy/intelligent_medical/medical_data.md) 。
+数据中一共有7类总数为4.4万的医药实体，10类总数约27万实体关系的知识图谱，具体实体以及关系的数据结构介绍见以上或者[这里](https://github.com/jiangnanboy/intelligent_medical/blob/master/medical_data.md) 。
 本项目预计有以下几个核心功能：
 1) 关于医疗搜索
 2) 关于医疗图谱
