@@ -1,0 +1,131 @@
+[{"medical" : {
+  "mappings" : {
+      "properties": {
+
+        "id": {
+        "type": "keyword",
+        "ignore_above": 256
+        },
+
+        "name": {
+        "type": "text",
+        "fields": {
+        "keyword": {
+        "type": "keyword",
+        "ignore_above": 256
+        }
+        },
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_smart"
+        },
+
+        "symptom": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_smart"
+        },
+
+        "acompany": {
+        "type": "text",
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_smart"
+        },
+
+        "desc": {
+        "type": "text",
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_smart"
+        },
+
+        "prevent": {
+        "type": "text",
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_smart"
+        },
+
+        "cause": {
+        "type": "text",
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_smart"
+        },
+
+        "getProb": {
+        "type": "keyword",
+        "ignore_above": 256
+        },
+
+        "easyGet": {
+        "type": "text",
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_smart"
+        },
+
+        "cure_department": {
+        "type": "text",
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_smart"
+        },
+
+        "cure_way": {
+        "type": "text",
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_smart"
+        },
+
+        "cure_lasttime": {
+        "type": "text",
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_smart"
+        },
+
+        "cured_prob": {
+        "type": "text",
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_smart"
+        },
+
+        "common_drug": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_smart"
+        },
+
+        "recommand_drug": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_smart"
+        },
+
+        "not_eat": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_smart"
+        },
+
+        "do_eat": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_smart"
+        },
+
+        "recommand_eat": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_smart"
+        },
+
+        "check": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_smart"
+        },
+
+        "drug_detail": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_smart"
+        }
+}
+  }
+}
+}]

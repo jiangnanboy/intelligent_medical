@@ -1,0 +1,9 @@
+java11
+elasticsearch7.12
+kibana7.12
+neo4j3.5.22
+spark3.0+
+elasticsearch-analysis-ik-7.12.0
+spark-nlp2.12
+spark-core2.9.3
+hanlp1.8.2
