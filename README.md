@@ -49,7 +49,7 @@
 
 ![image](https://github.com/jiangnanboy/intelligent_medical/blob/master/images/search.png)
 
-2、关于医疗图谱，在neo4j中返回与某疾病相关三元组信息：
+2、关于医疗图谱，在neo4j中返回与某疾病相关三元组信息，包括推荐药品、推荐食谱以及伴随症状等：
 
 ![image](https://github.com/jiangnanboy/intelligent_medical/blob/master/images/kg_triples.png)
 
