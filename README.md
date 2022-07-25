@@ -21,7 +21,9 @@
 # 图谱的构建以及数据存储
 这里分为两部分，一部分医疗数据以图谱的形式存入neo4j中；另一部分医疗数据以json格式存入elasticsearch中。
 
-1、存入neo4j（micro_service/service/NeoUtilService.java）
+1、数据处理见（sy/process）,存入neo4j中的数据被处理成节点和关系的文本文件（resources/kg_input_data/），便于批量导入。
+
+2、存入neo4j（micro_service/service/NeoUtilService.java）
 
 将节点和关系批量导入neo4j。
 
@@ -29,7 +31,7 @@
 
 ![image](https://github.com/jiangnanboy/intelligent_medical/blob/master/images/neo4j.png)
 
-2、存入elasticsearch（micro_service/service/EsUtilService.java）
+3、存入elasticsearch（micro_service/service/EsUtilService.java）
 
 将医疗数据以json格式存入elasticsearch中，这里包括自动构建mapping（mapping格式resources/medical_mapping.json）。
 
@@ -45,11 +47,11 @@
 2、服务启动：micro_service/IntelligentServer.java。
 
 # 结果展示
-1、关于医疗搜索，这里通过elasticsearch搜索疾病名，并以分页形式返回结果：
+1、关于医疗搜索，这里通过elasticsearch搜索疾病名称，并以分页形式返回相关结果：
 
 ![image](https://github.com/jiangnanboy/intelligent_medical/blob/master/images/search.png)
 
-2、关于医疗图谱，在neo4j中返回与某疾病相关三元组信息，包括推荐药品、推荐食谱以及伴随症状等：
+2、关于医疗图谱，在neo4j中返回与某疾病相关的三元组信息，包括推荐药品、推荐食谱以及伴随症状等：
 
 ![image](https://github.com/jiangnanboy/intelligent_medical/blob/master/images/kg_triples.png)
 
