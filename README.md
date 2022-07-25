@@ -21,7 +21,7 @@
 # 图谱的构建以及数据存储
 这里分为两部分，一部分医疗数据以图谱的形式存入neo4j中；另一部分医疗数据以json格式存入elasticsearch中。
 
-1、数据处理见（sy/process）,存入neo4j中的数据被处理成节点和关系的文本文件（resources/kg_input_data/），便于批量导入。
+1、数据处理见（sy/process）,存入neo4j中的数据被处理成节点和关系的文本文件（resources/kg_input_data/），便于快速批量导入。
 
 2、存入neo4j（micro_service/service/NeoUtilService.java）
 
