@@ -33,7 +33,7 @@ public class EsDelete {
      * delete all data of index
      */
     public static void deleteAllData() {
-        String index = PropertiesReader.get("es_index");
+        String index = PropertiesReader.get("medical_index");
         LOGGER.info("delete all data of index -> " + index);
         if(StringUtils.isNotBlank(index)) {
             RestHighLevelClient client = null;
