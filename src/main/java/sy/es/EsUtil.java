@@ -298,7 +298,7 @@ public class EsUtil {
      */
     public static boolean insertData2Es(String jsonFilePath) {
         LOGGER.info("insert json data to es ...");
-        String index = PropertiesReader.get("es_index");
+        String index = PropertiesReader.get("medical_index");
         boolean insertBoolean = false;
         if(StringUtils.isNotBlank(jsonFilePath) && StringUtils.isNotBlank(index)) {
             List<Map<String, Object>> infoMapList = null;
