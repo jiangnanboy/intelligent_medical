@@ -14,11 +14,6 @@ import java.util.stream.Collectors;
  * @date 2022/7/21 22:22
  */
 public class Segment {
-    public static void main(String[] args) {
-        String text = "date到date ns在2021年1月2日出台了哪些法规";
-        System.out.println(Segment.hanlpSegment(text, false));
-        System.out.println(Segment.hanlpNer("中央出台的法律", false));
-    }
 
     /**
      * text segmentation
