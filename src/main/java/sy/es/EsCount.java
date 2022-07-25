@@ -29,7 +29,7 @@ public class EsCount {
      * @return
      */
     public long countByQuery(String query, String field) {
-        String index = PropertiesReader.get("es_index");
+        String index = PropertiesReader.get("medical_index");
         LOGGER.info("count docs -> " +index + " query -> " + query);
         if(StringUtils.isNotBlank(query)) {
             RestHighLevelClient client = null;
