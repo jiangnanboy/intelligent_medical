@@ -49,14 +49,42 @@
 1、关于医疗搜索，这里通过elasticsearch搜索疾病名称，并以分页形式返回相关结果
 
    访问：http://localhost:4567/engine/search?query=鼻炎&currentPage=1&size=10
-
-![image](https://github.com/jiangnanboy/intelligent_medical/blob/master/images/search.png)
+```
+[
+  {
+    "name": "鼻炎",
+    "id": "5bb57901831b973a137e6124"
+  },
+  {
+    "name": "急性鼻炎",
+    "id": "5bb578c9831b973a137e469f"
+  },
+  {
+    "name": "小儿鼻炎",
+    "id": "5bb578d8831b973a137e4d6d"
+  },
+  {
+    "name": "慢性鼻炎",
+    "id": "5bb578dd831b973a137e4fab"
+  },
+  {
+    "name": "常年性鼻炎",
+    "id": "5bb578c1831b973a137e42b3"
+  },
+  ...
+]
+```
 
 2、关于医疗图谱，在neo4j中返回与某疾病相关的三元组信息，包括推荐药品、推荐食谱以及伴随症状等
 
    访问：http://localhost:4567/engine/kg?id=5bb57901831b973a137e6124
-
-![image](https://github.com/jiangnanboy/intelligent_medical/blob/master/images/kg_triples.png)
+```
+[{"left":{"id":"5bb57901831b973a137e6124","name":"鼻炎","label":"Disease"},"middle":"RECOMMAND_EAT","right":{"name":"黄花鱼粥","label":"Food"}},
+{"left":{"id":"5bb57901831b973a137e6124","name":"鼻炎","label":"Disease"},"middle":"RECOMMAND_EAT","right":{"name":"花生猪蹄汤","label":"Food"}},
+{"left":{"id":"5bb57901831b973a137e6124","name":"鼻炎","label":"Disease"},"middle":"RECOMMAND_EAT","right":{"name":"独脚金煲猪瘦肉","label":"Food"}},
+{"left":{"id":"5bb57901831b973a137e6124","name":"鼻炎","label":"Disease"},"middle":"RECOMMAND_EAT","right":{"name":"肉卤鸡蛋","label":"Food"}},
+{"left":{"id":"5bb57901831b973a137e6124","name":"鼻炎","label":"Disease"},"middle":"RECOMMAND_EAT","right":{"name":"摊鸡蛋","label":"Food"}},...]
+```
 
 3、关于医疗问答，通过医疗疾病问答的形式，返回答案
 
