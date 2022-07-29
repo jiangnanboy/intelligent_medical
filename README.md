@@ -80,10 +80,10 @@
    访问：http://localhost:4567/engine/kg?id=5bb57901831b973a137e6124
 ```
 [{"left":{"id":"5bb57901831b973a137e6124","name":"鼻炎","label":"Disease"},"middle":"RECOMMAND_EAT","right":{"name":"黄花鱼粥","label":"Food"}},
-{"left":{"id":"5bb57901831b973a137e6124","name":"鼻炎","label":"Disease"},"middle":"RECOMMAND_EAT","right":{"name":"花生猪蹄汤","label":"Food"}},
+{"left":{"id":"5bb57901831b973a137e6124","name":"鼻炎","label":"Disease"},"middle":"RECOMMAND_DRUG","right":{"name":"匹多莫德片","label":"Drug"}},
 {"left":{"id":"5bb57901831b973a137e6124","name":"鼻炎","label":"Disease"},"middle":"RECOMMAND_EAT","right":{"name":"独脚金煲猪瘦肉","label":"Food"}},
-{"left":{"id":"5bb57901831b973a137e6124","name":"鼻炎","label":"Disease"},"middle":"RECOMMAND_EAT","right":{"name":"肉卤鸡蛋","label":"Food"}},
-{"left":{"id":"5bb57901831b973a137e6124","name":"鼻炎","label":"Disease"},"middle":"RECOMMAND_EAT","right":{"name":"摊鸡蛋","label":"Food"}},...]
+{"left":{"id":"5bb57901831b973a137e6124","name":"鼻炎","label":"Disease"},"middle":"NEED_CHECK","right":{"name":"后鼻镜检查","label":"Check"}},
+{"left":{"id":"5bb57901831b973a137e6124","name":"鼻炎","label":"Disease"},"middle":"NO_EAT","right":{"name":"沙丁鱼","label":"Food"}},...]
 ```
 
 3、关于医疗问答，通过医疗疾病问答的形式，返回答案
