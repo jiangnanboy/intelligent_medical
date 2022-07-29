@@ -85,5 +85,27 @@ public class NeoSearch {
         return recordList;
     }
 
+    /**
+     * run cypher and get record
+     * @param cypher
+     * @return
+     */
+    public static List<Record> runGetCypher(String cypher) {
+        List<Record> recordList = null;
+        Driver driver = null;
+        try {
+            driver = NeoPoolUtil.borrowDriver();
+            try(Session session = driver.session()) {
+                recordList = session.readTransaction(tx ->
+                        tx.run(cypher)).list();
+            }
+        } finally {
+            if(Optional.ofNullable(driver).isPresent()) {
+                NeoPoolUtil.returnDriver(driver);
+            }
+        }
+        return recordList;
+    }
+
 }
 
