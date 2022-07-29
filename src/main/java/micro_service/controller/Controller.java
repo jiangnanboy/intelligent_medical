@@ -1,5 +1,6 @@
 package micro_service.controller;
 
+import micro_service.service.QAService;
 import micro_service.service.SearchService;
 import micro_service.utils.ResponseError;
 import spark.servlet.SparkApplication;
@@ -13,10 +14,11 @@ import static spark.Spark.*;
  */
 public class Controller implements SparkApplication {
     private SearchService searchService;
+    private QAService qaService;
 
-
-    public Controller(SearchService searchService) {
+    public Controller(SearchService searchService, QAService qaService) {
         this.searchService = searchService;
+        this.qaService = qaService;
     }
 
     @Override
@@ -36,6 +38,11 @@ public class Controller implements SparkApplication {
                 req.queryParams("id")
         ), json());
 
+
+        // 3.get answer by question
+        get("/engine/qa", (req, res) -> qaService.qa(
+                req.queryParams("question")
+        ), json());
 
         after((req, res) -> res.type("application/json"));
 
