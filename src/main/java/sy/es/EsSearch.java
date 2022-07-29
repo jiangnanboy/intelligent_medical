@@ -1,5 +1,7 @@
 package sy.es;
 
+import org.elasticsearch.action.get.GetRequest;
+import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -53,6 +55,34 @@ public class EsSearch {
             mapList = Arrays.stream(hits).map(hit -> hit.getSourceAsMap()).collect(Collectors.toList());
         }
         return mapList;
+    }
+
+    /**
+     * get one doc map
+     * @param client
+     * @param index
+     * @param id
+     * @return
+     */
+    public static Map<String, Object> getOneDocById(RestHighLevelClient client, String index, String id) {
+        SearchRequest request = new SearchRequest(index);
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        boolQueryBuilder.filter(QueryBuilders.termQuery("id", id));
+        searchSourceBuilder.query(boolQueryBuilder);
+        request.source(searchSourceBuilder);
+        SearchResponse response = null;
+        try {
+            response = client.search(request, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Map<String, Object> map = null;
+        if(Optional.ofNullable(response).isPresent()) {
+            SearchHit[] hits = response.getHits().getHits();
+            map = hits[0].getSourceAsMap();
+        }
+        return map;
     }
 
 }
