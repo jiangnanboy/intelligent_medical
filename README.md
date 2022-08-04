@@ -40,7 +40,7 @@
 ![image](https://github.com/jiangnanboy/intelligent_medical/blob/master/images/es.png)
 
 # 项目运行方式
-利用微服务(spark-core)方式启动：
+利用微服务(sparkjava)方式启动：
 
 1、配置要求：见requirement.txt。  
 2、服务启动：micro_service/IntelligentServer.java。
