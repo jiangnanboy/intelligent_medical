@@ -29,7 +29,7 @@
 
 如下截图：
 
-![image](https://github.com/jiangnanboy/intelligent_medical/blob/master/images/neo4j.png)
+![image](https://github.com/jiangnanboy/intelligent_medical/blob/master/images/schema.png)
 
 3、存入elasticsearch（micro_service/service/EsUtilService.java）
 
