@@ -1,6 +1,7 @@
 package micro_service.controller;
 
 import micro_service.service.QAService;
+import micro_service.service.RelatedService;
 import micro_service.service.SearchService;
 import micro_service.utils.ResponseError;
 import spark.servlet.SparkApplication;
@@ -15,10 +16,12 @@ import static spark.Spark.*;
 public class Controller implements SparkApplication {
     private SearchService searchService;
     private QAService qaService;
+    private RelatedService relatedService;
 
-    public Controller(SearchService searchService, QAService qaService) {
+    public Controller(SearchService searchService, QAService qaService, RelatedService relatedService) {
         this.searchService = searchService;
         this.qaService = qaService;
+        this.relatedService = relatedService;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class Controller implements SparkApplication {
 
         // access interface
 
-        // 1.get disease id by query
+        // 1.search disease from es by query
         get("/engine/search", (req, res) -> searchService.searchDiseaseFromEs(
                 req.queryParams("query"),
                 Integer.parseInt(req.queryParams("currentPage")),
@@ -42,6 +45,13 @@ public class Controller implements SparkApplication {
         // 3.get answer by question
         get("/engine/qa", (req, res) -> qaService.qa(
                 req.queryParams("question")
+        ), json());
+
+        // 4.get related disease node
+        get("/engine/related", (req, res) -> relatedService.getRelatedDisease(
+                req.queryParams("id"),
+                req.queryParams("query"),
+                Integer.parseInt(req.queryParams("size"))
         ), json());
 
         after((req, res) -> res.type("application/json"));
