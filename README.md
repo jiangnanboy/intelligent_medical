@@ -104,7 +104,7 @@
 ...
 ```
 
-4.相关推荐
+4.相关(同一个科室的疾病)推荐
 
     这里在neo4j中对label为"Disease"的实体的属性"name"构建索引，语句如下：
     call db.index.fulltext.createNodeIndex('disease',['Disease'],['name'],{analyzer:'cjk'})
