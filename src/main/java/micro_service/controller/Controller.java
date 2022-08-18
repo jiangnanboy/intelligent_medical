@@ -1,7 +1,7 @@
 package micro_service.controller;
 
 import micro_service.service.QAService;
-import micro_service.service.RelatedService;
+import micro_service.service.RelatedDiseaseService;
 import micro_service.service.SearchService;
 import micro_service.utils.ResponseError;
 import spark.servlet.SparkApplication;
@@ -16,9 +16,9 @@ import static spark.Spark.*;
 public class Controller implements SparkApplication {
     private SearchService searchService;
     private QAService qaService;
-    private RelatedService relatedService;
+    private RelatedDiseaseService relatedService;
 
-    public Controller(SearchService searchService, QAService qaService, RelatedService relatedService) {
+    public Controller(SearchService searchService, QAService qaService, RelatedDiseaseService relatedService) {
         this.searchService = searchService;
         this.qaService = qaService;
         this.relatedService = relatedService;
