@@ -11,7 +11,7 @@ import java.util.Map;
  * @author YanShi
  * @date 2022/8/13 14:45
  */
-public class RelatedService {
+public class RelatedDiseaseService {
     public List<Map<String, Object>> getRelatedDisease(String id, String query, int size) {
         List<Record> recordList = NeoSearch.getRelatedDisease(id, query, size);
         List<Map<String, Object>> mapNode = CollectionUtil.newArrayList();
