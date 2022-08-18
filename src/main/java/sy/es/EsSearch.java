@@ -1,5 +1,7 @@
 package sy.es;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.hadoop.yarn.webapp.hamlet.HamletSpec;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.search.SearchRequest;
@@ -7,6 +9,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MoreLikeThisQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -55,6 +58,40 @@ public class EsSearch {
             mapList = Arrays.stream(hits).map(hit -> hit.getSourceAsMap()).collect(Collectors.toList());
         }
         return mapList;
+    }
+
+    /**
+     * get related query
+     * @param client
+     * @param index
+     * @param query
+     * @param size
+     * @return
+     */
+    public static List<String> getRelatedQuery(RestHighLevelClient client, String index, String query, int size) {
+        SearchRequest request = new SearchRequest(index);
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        MoreLikeThisQueryBuilder moreLikeThisQueryBuilder = QueryBuilders.moreLikeThisQuery(new String[]{"name"}, new String[]{query}, null)
+                .minTermFreq(1)
+                .maxQueryTerms(24);
+
+        searchSourceBuilder.query(moreLikeThisQueryBuilder);
+        searchSourceBuilder.size(size + 1);
+        searchSourceBuilder.fetchSource(new String[]{"name"}, null);
+        request.source(searchSourceBuilder);
+        SearchResponse response = null;
+        try {
+            response = client.search(request, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<String> queryList = null;
+        if(Optional.ofNullable(response).isPresent()) {
+            SearchHit[] hits = response.getHits().getHits();
+            queryList = Arrays.stream(hits).map(hit -> hit.getSourceAsMap().get("name").toString()).collect(Collectors.toList());
+            queryList = queryList.stream().filter(q -> !StringUtils.equals(q, query)).collect(Collectors.toList());
+        }
+        return queryList.subList(0, size);
     }
 
     /**
