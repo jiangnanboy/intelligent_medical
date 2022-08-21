@@ -157,13 +157,33 @@
 ]
 ```
 
+6.查询自动补全
+
+    在用户输入query时，会自动进行补全。这里利用的是es的自动补全技术：
+    对所有disease疾病名称构建索引，type为completion，见es_scheme/disease_completion_mapping.json以及disease_completion/disease_process.json。
+访问：http://localhost:4567/engine/completion?query=肝&size=10
+```
+[
+"肝-甲状腺综合征",
+"肝上皮样血管内皮细胞瘤",
+"肝内胆管结石",
+"肝动脉瘤",
+"肝动脉闭塞",
+"肝包虫囊肿",
+"肝包虫病",
+"肝厥",
+"肝吸虫病",
+"肝咳"
+]
+```
+
 # Todo
 
 - [x] 搜索
 - [x] 图谱
 - [x] 问答
 - [x] 相关推荐
-- [ ] 查询自动补全
+- [x] 查询自动补全
 - [x] 相关查询推荐
 - [ ] 专题挖掘
 - [ ] 智能诊断
