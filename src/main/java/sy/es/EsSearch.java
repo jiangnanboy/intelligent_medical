@@ -1,9 +1,6 @@
 package sy.es;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.hadoop.yarn.webapp.hamlet.HamletSpec;
-import org.elasticsearch.action.get.GetRequest;
-import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -13,6 +10,11 @@ import org.elasticsearch.index.query.MoreLikeThisQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.suggest.Suggest;
+import org.elasticsearch.search.suggest.SuggestBuilder;
+import org.elasticsearch.search.suggest.SuggestBuilders;
+import org.elasticsearch.search.suggest.completion.CompletionSuggestion;
+import utils.CollectionUtil;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -92,6 +94,41 @@ public class EsSearch {
             queryList = queryList.stream().filter(q -> !StringUtils.equals(q, query)).collect(Collectors.toList());
         }
         return queryList.subList(0, size);
+    }
+
+    /**
+     * get query completion
+     * @param client
+     * @param index
+     * @param query
+     * @param size
+     * @return
+     */
+    public static List<String> getQueryCompletion(RestHighLevelClient client, String index, String query, int size) {
+        SearchRequest request = new SearchRequest(index);
+        request.source().suggest(new SuggestBuilder().addSuggestion("suggestion",
+                SuggestBuilders.completionSuggestion("disease_completion")
+        .prefix(query)
+        .skipDuplicates(true)
+        .size(size)
+        ));
+        SearchResponse response = null;
+        try {
+            response = client.search(request, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<String> queryList = CollectionUtil.newArrayList();
+        if(Optional.ofNullable(response).isPresent()) {
+            Suggest suggest = response.getSuggest();
+            CompletionSuggestion suggestion = suggest.getSuggestion("suggestion");
+            List<CompletionSuggestion.Entry.Option> options = suggestion.getOptions();
+            for(CompletionSuggestion.Entry.Option option : options) {
+                String text = option.getText().toString();
+                queryList.add(text);
+            }
+        }
+        return queryList;
     }
 
     /**
