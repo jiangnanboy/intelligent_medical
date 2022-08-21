@@ -2,10 +2,7 @@ package micro_service;
 
 import micro_service.config.Config;
 import micro_service.controller.Controller;
-import micro_service.service.QAService;
-import micro_service.service.RelatedDiseaseService;
-import micro_service.service.RelatedQueryService;
-import micro_service.service.SearchService;
+import micro_service.service.*;
 
 /**
  * @author sy
@@ -16,7 +13,7 @@ public class IntelligentServer {
     public static void main(String ... args) {
         Config.initPort(4567);
 //        new Controller(new SearchService(), new QaService()).init();
-        new Controller(new SearchService(), new QAService(), new RelatedDiseaseService(), new RelatedQueryService()).init();
+        new Controller(new SearchService(), new QAService(), new RelatedDiseaseService(), new RelatedQueryService(), new CompletionService()).init();
     }
 
 }
