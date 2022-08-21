@@ -11,9 +11,15 @@ public class EsUtilService {
 
     public static void main(String...args) {
         // build mapping and insert data
+
 //        buildMapping();
-        String medicalJson = EsUtilService.class.getClassLoader().getResource(PropertiesReader.get("medical")).getPath().replaceFirst("/", "");
-        insertData(PropertiesReader.get("medical_index"), medicalJson);
+//        String medicalJson = EsUtilService.class.getClassLoader().getResource(PropertiesReader.get("medical")).getPath().replaceFirst("/", "");
+//        insertData(PropertiesReader.get("medical_index"), medicalJson);
+
+
+        String medicalJson = EsUtilService.class.getClassLoader().getResource(PropertiesReader.get("disease_complete")).getPath().replaceFirst("/", "");
+        insertData(PropertiesReader.get("disea_comple_index"), medicalJson);
+
     }
 
     /**
