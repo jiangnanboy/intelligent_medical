@@ -1,9 +1,6 @@
 package micro_service.controller;
 
-import micro_service.service.QAService;
-import micro_service.service.RelatedDiseaseService;
-import micro_service.service.RelatedQueryService;
-import micro_service.service.SearchService;
+import micro_service.service.*;
 import micro_service.utils.ResponseError;
 import spark.servlet.SparkApplication;
 
@@ -19,12 +16,14 @@ public class Controller implements SparkApplication {
     private QAService qaService;
     private RelatedDiseaseService relatedService;
     private RelatedQueryService relatedQueryService;
+    private CompletionService completionService;
 
-    public Controller(SearchService searchService, QAService qaService, RelatedDiseaseService relatedService, RelatedQueryService relatedQueryService) {
+    public Controller(SearchService searchService, QAService qaService, RelatedDiseaseService relatedService, RelatedQueryService relatedQueryService, CompletionService completionService) {
         this.searchService = searchService;
         this.qaService = qaService;
         this.relatedService = relatedService;
         this.relatedQueryService = relatedQueryService;
+        this.completionService = completionService;
     }
 
     @Override
@@ -57,8 +56,14 @@ public class Controller implements SparkApplication {
                 Integer.parseInt(req.queryParams("size"))
         ), json());
 
-        // 4.get related query
+        // 5.get related query
         get("/engine/relatedQuery", (req, res) -> relatedQueryService.getRelatedQuery(
+                req.queryParams("query"),
+                Integer.parseInt(req.queryParams("size"))
+        ), json());
+
+        // 6.get query completion
+        get("/engine/completion", (req, res) -> completionService.queryCompletion(
                 req.queryParams("query"),
                 Integer.parseInt(req.queryParams("size"))
         ), json());
