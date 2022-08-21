@@ -1,0 +1,10 @@
+[{"disea_comple" : {
+  "mappings" : {
+      "properties": {
+        "disease_completion": {
+          "type": "completion"
+        }
+}
+  }
+}
+}]
