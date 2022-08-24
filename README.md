@@ -16,6 +16,8 @@
 8) 语音
 9) ...
 
+![image](https://github.com/jiangnanboy/intelligent_medical/blob/master/images/project.png)
+
 # 图谱的构建以及数据存储
 这里分为两部分，一部分医疗数据以图谱的形式存入neo4j中；另一部分医疗数据以json格式存入elasticsearch中。
 
