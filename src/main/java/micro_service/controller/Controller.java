@@ -17,13 +17,15 @@ public class Controller implements SparkApplication {
     private RelatedDiseaseService relatedService;
     private RelatedQueryService relatedQueryService;
     private CompletionService completionService;
+    private DiagnosisService diagnosisService;
 
-    public Controller(SearchService searchService, QAService qaService, RelatedDiseaseService relatedService, RelatedQueryService relatedQueryService, CompletionService completionService) {
+    public Controller(SearchService searchService, QAService qaService, RelatedDiseaseService relatedService, RelatedQueryService relatedQueryService, CompletionService completionService, DiagnosisService diagnosisService) {
         this.searchService = searchService;
         this.qaService = qaService;
         this.relatedService = relatedService;
         this.relatedQueryService = relatedQueryService;
         this.completionService = completionService;
+        this.diagnosisService = diagnosisService;
     }
 
     @Override
@@ -65,6 +67,14 @@ public class Controller implements SparkApplication {
         // 6.get query completion
         get("/engine/completion", (req, res) -> completionService.queryCompletion(
                 req.queryParams("query"),
+                Integer.parseInt(req.queryParams("size"))
+        ), json());
+
+        // 7.disease diagnosis
+        get("/engine/diagnosis", (req, res) -> diagnosisService.getDiagnoseResult(
+                req.queryParams("symptom"),
+                req.queryParams("sex"),
+                Integer.parseInt(req.queryParams("age")),
                 Integer.parseInt(req.queryParams("size"))
         ), json());
 
