@@ -12,8 +12,12 @@ public class IntelligentServer {
 
     public static void main(String ... args) {
         Config.initPort(4567);
-//        new Controller(new SearchService(), new QaService()).init();
-        new Controller(new SearchService(), new QAService(), new RelatedDiseaseService(), new RelatedQueryService(), new CompletionService()).init();
+        new Controller(new SearchService(),
+                        new QAService(),
+                        new RelatedDiseaseService(),
+                        new RelatedQueryService(),
+                        new CompletionService(),
+                        new DiagnosisService()).init();
     }
 
 }
