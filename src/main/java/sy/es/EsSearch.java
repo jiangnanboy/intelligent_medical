@@ -63,6 +63,36 @@ public class EsSearch {
     }
 
     /**
+     * search symptom
+     * @param client
+     * @param index
+     * @param symptom
+     * @param size
+     * @return
+     */
+    public static List<Map<String, Object>> searchBySymptom(RestHighLevelClient client, String index, String symptom, int size) {
+        SearchRequest request = new SearchRequest(index);
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        boolQueryBuilder.must(QueryBuilders.matchQuery("symptom", symptom));
+        searchSourceBuilder.query(boolQueryBuilder);
+        searchSourceBuilder.size(size);
+        request.source(searchSourceBuilder);
+        SearchResponse response = null;
+        try {
+            response = client.search(request, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<Map<String, Object>> mapList = null;
+        if(Optional.ofNullable(response).isPresent()) {
+            SearchHit[] hits = response.getHits().getHits();
+            mapList = Arrays.stream(hits).map(hit -> hit.getSourceAsMap()).collect(Collectors.toList());
+        }
+        return mapList;
+    }
+
+    /**
      * get related query
      * @param client
      * @param index
